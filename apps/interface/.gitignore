@@ -18,4 +18,4 @@ erl_crash.dump
 
 priv/elm-stuff
 
-priv/*.js
+priv/static/*.js
