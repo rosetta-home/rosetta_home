@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" href="/static/css/nv.d3.min.css"></link>
+        <link rel="stylesheet" href="/static/css/floorplan-styles.css"></link>
+        <title>SensorNode Floorplan View</title>
+    </head>
+    <body id="body" onload="init();">
+        <a class="floorplan" href="/static/img/convention_booth.png">
+            <img width="1280;" src="/static/img/convention_booth.png">
+        </a>
+        <script src="/static/js/d3.min.js"></script>
+        <script src="/static/js/nv.d3.min.js"></script>
+        <script src="/static/js/jquery-3.1.1.min.js"></script>
+        <script src="/static/js/magnifik.min.js"></script>
+        <script src="/static/js/simpleheat.js"></script>
+        <script type="text/javascript">
+            var ws_url = "ws://<%= hostname %>:8081/ws";
+            var socket = new WebSocket(ws_url);
+            var nodes = {
+                "IEQStation-2": {x: 150, y: 150, value: 0},
+                "IEQStation-3": {x: 1100, y: 150, value: 0},
+                "IEQStation-4": {x: 1100, y: 650, value: 0},
+                "IEQStation-5": {x: 150, y: 650, value: 0},
+                "IEQStation-5-2": {x: 650, y: 250, value: 0},
+            }, heat, start;
+            socket.onopen = function(e){
+                console.log("Websocket Opened");
+            }
+
+            socket.onmessage = function(ev){
+                var d = JSON.parse(ev.data)
+                if(d.type == 'ieq'){
+                    nodes[d.name].value = d.state.temperature;
+                    if(nodes[d.name+"-2"]) nodes[d.name+"-2"].value = d.state.temperature;
+                    console.log(nodes);
+                }
+            }
+            function init(){
+                $('a.floorplan').magnifik({
+                    ratio: 1,
+                    clickCloses: false,
+                });
+                register_listeners();
+            }
+
+            function register_listeners(){
+                var $element = $('a.floorplan');
+                var openingEvent = 'magnifik:opening';
+                var openedEvent = 'magnifik:open';
+                var closedEvent = 'magnifik:close';
+                var closingEvent = 'magnifik:closing';
+
+                $element.on(openingEvent, function(event) {
+                    console.log(openingEvent + ' event has been fired');
+                });
+
+                $element.on(openedEvent, function(event) {
+                    console.log(openedEvent + ' event has been fired');
+                    var elem = document.getElementById("body");
+                    req = elem.requestFullScreen || elem.webkitRequestFullScreen || elem.mozRequestFullScreen;
+                    req.call(elem);
+                    setTimeout(function(){
+                        width = $(".m-magnifikFull").width();
+                        height = $(".m-magnifikFull").height();
+                        $(".m-magnifikFull").click(function(e){
+                            var x = (e.offsetX-10);
+                            var y = (e.offsetY-10);
+                            console.log("Clicked at: "+ x + ", " + y);
+                        });
+                        load_heatmap(width, height);
+                    }, 1000);
+                });
+            }
+
+            function load_heatmap(width, height){
+                var $element = $('.m-magnifikCanvas');
+                var c = document.createElement("canvas");
+                c.width = width;
+                c.height = height;
+                $element.append(c);
+                heat = simpleheat(c);
+                heat.max(33);
+                heat.radius(300, 220);
+                draw(0);
+            }
+
+            function draw(ts){
+                if (!start) start = ts;
+                var progress = ts - start;
+                if(progress > 200){
+                    start = ts;
+                    var data = [];
+                    for(n in nodes){
+                        var no = nodes[n];
+                        data.push([no.x, no.y, no.value]);
+                    }
+                    console.log(data);
+                    //heat.clear();
+                    heat.data(data);
+                    heat.draw();
+                }
+                window.requestAnimationFrame(draw);
+            }
+        </script>
+    </body>
+</html>

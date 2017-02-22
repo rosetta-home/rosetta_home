@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="theme-color" content="#607D8B">
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css"></link>
+        <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css"></link>
+        <link rel="stylesheet" href="/static/css/styles.css"></link>
+        <title>Rosetta Home 2.0</title>
+    </head>
+    <body>
+        <script src="/static/js/jquery-3.1.1.min.js"></script>
+        <h4>WiFi Network info saved. Please reconnect to your WiFi Network. Device is restarting.</h4>
+    </body>
+</html>

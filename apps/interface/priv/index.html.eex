@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="theme-color" content="#607D8B">
+        <link rel="stylesheet" href="/static/font-face.css"></link>
+        <link rel="stylesheet" href="/static/mdl/material.min.css"></link>
+        <link rel="stylesheet" href="/static/css/nv.d3.min.css"></link>
+        <link rel="stylesheet" href="/static/css/styles.css"></link>
+        <title>Rosetta Home 2.0</title>
+    </head>
+    <body onload="init();">
+        <script src="/static/js/d3.min.js"></script>
+        <script src="/static/js/nv.d3.min.js"></script>
+        <script src="/static/js/jquery-3.1.1.min.js"></script>
+        <script src="/static/mdl/material.min.js"></script>
+        <script src="/static/js/colorpicker.js"></script>
+        <script src="/static/js/histogram.js"></script>
+        <script src="app.js"></script>
+        <script type="text/javascript">
+            var app;
+            var hostname = "<%= hostname %>";
+            function init(){
+                app = Elm.Main.fullscreen({hostname: hostname});
+                app.ports.hideColorPicker.subscribe(hideColorPicker);
+                app.ports.showColorPicker.subscribe(showColorPicker);
+                app.ports.showHistogram.subscribe(showHistogram);
+                app.ports.hideHistogram.subscribe(hideHistogram);
+            }
+        </script>
+    </body>
+</html>

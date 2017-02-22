@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#607D8B">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css"></link>
+    <link rel="stylesheet" href="/static/css/styles.css"></link>
+    <script src="/static/js/jquery-3.1.1.min.js"></script>
+    <title>Rosetta Home 2.0</title>
+  </head>
+  <body onload="init();" class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+        <h4>Select WiFi network to connect to and enter the network's password and hit 'Connect'.</h4>
+        <h5>Networks</h5>
+        <div id="networks" class="list-group">
+          <%= for network <- networks do %>
+            <button type="button" class="list-group-item">
+              <p class="ssid"><%= network.ssid %></p>
+              <form class="psk" id="<%= network.ssid %>" method="POST" action="/connect_network">
+                <input name="ssid" type="hidden" value="<%= network.ssid %>" />
+                <input name="psk" type="password" placeholder="SSID Password" />
+                <input type="submit" value="Connect" />
+              </form>
+            </button>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <script>
+      function init(){
+        $(".psk").hide();
+        $(".ssid").click(function(e){
+          $(this).parent().children(".psk").toggle();
+        });
+      }
+    </script>
+  </body>
+</html>
