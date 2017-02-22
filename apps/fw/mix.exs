@@ -65,7 +65,7 @@ defmodule Fw.Mixfile do
     ]
   end
   def system("rpi3", :prod) do
-    [{:"nerves_system_rpi3", git: "https://github.com/NationalAssociationOfRealtors/nerves_system_rpi3.git", tag: "v0.10.2-dev" }]
+    [{:"nerves_system_rpi3", git: "https://github.com/rosetta-home/nerves_system_rpi3.git", tag: "v0.10.2" }]
   end
   def system(_, _), do: []
 
