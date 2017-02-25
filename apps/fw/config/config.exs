@@ -11,6 +11,8 @@ config :logger,
   compile_time_purge_level: :info,
   level: :info
 
+config :sasl, errlog_type: :error
+
 config :nerves, :firmware,
   fwup_conf: "config/rpi3/fwup.conf",
   rootfs_additions: "config/rpi3/rootfs-additions"

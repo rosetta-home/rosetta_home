@@ -15,7 +15,7 @@ defmodule CloudLogger.Worker do
   def handle_info(:send_data, state) do
     values = DataManager.Histogram.snapshot()
     Logger.info "#{inspect values}"
-    Process.send_after(self(), :send_data, 10*1000)
+    #Process.send_after(self(), :send_data, 10*1000)
     {:noreply, state}
   end
 
