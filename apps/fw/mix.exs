@@ -8,9 +8,9 @@ defmodule Fw.Mixfile do
      version: "0.0.1",
      target: @target,
      archives: [nerves_bootstrap: "~> 0.2.1"],
-     deps_path: "../../deps/#{@target}",
-     build_path: "../../_build/#{@target}",
-     lockfile: "../../mix.lock",
+     deps_path: "deps/#{@target}",
+     build_path: "_build/#{@target}",
+     lockfile: "mix.lock",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      aliases: aliases(Mix.env),
@@ -52,11 +52,11 @@ defmodule Fw.Mixfile do
 
   defp deps do
     [
-      {:nerves, github: "nerves-project/nerves", tag: "master", override: true},
+      {:nerves, github: "nerves-project/nerves", tag: "v0.4.7", override: true},
       {:nerves_firmware_http, github: "nerves-project/nerves_firmware_http", only: :prod},
       {:distillery, "~> 1.1.2"},
       {:poison, "~> 3.0", override: true},
-      {:cicada, github: "rosetta-home/cicada", override: true},
+      {:cicada, path: Path.expand("/app/rosetta-home/cicada", __DIR__), override: true},#github: "rosetta-home/cicada", override: true},
       {:interface, in_umbrella: true},
       {:rosetta_home_chromecast, github: "rosetta-home/rosetta_home_chromecast"},
       {:rosetta_home_radio_thermostat, github: "rosetta-home/rosetta_home_radio_thermostat"},
