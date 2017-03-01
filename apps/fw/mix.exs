@@ -57,7 +57,7 @@ defmodule Fw.Mixfile do
       {:nerves_firmware_http, github: "nerves-project/nerves_firmware_http", only: :prod},
       {:distillery, "~> 1.1.2"},
       {:poison, "~> 3.0", override: true},
-      {:cicada, path: Path.expand("/app/rosetta-home/cicada", __DIR__), override: true},#github: "rosetta-home/cicada", override: true},
+      {:cicada, github: "rosetta-home/cicada", override: true},
       {:interface, in_umbrella: true},
       {:rosetta_home_chromecast, github: "rosetta-home/rosetta_home_chromecast"},
       {:rosetta_home_radio_thermostat, github: "rosetta-home/rosetta_home_radio_thermostat"},

@@ -42,11 +42,11 @@ type alias MediaPlayerState =
   , current_time : Float
   , content_id: Int
   , content_type: String
-  , duration: Maybe Float
+  , duration: Float
   , autoplay: Bool
   , image: MediaPlayerStateImage
   , title: String
-  , subtitle: Maybe String
+  , subtitle: String
   , volume: Float
   , status: String
   , idle: Bool
@@ -78,11 +78,11 @@ decodeMediaPlayerState =
         |: ("current_time" := Json.Decode.float)
         |: ("content_id" := Json.Decode.int)
         |: ("content_type" := Json.Decode.string)
-        |: (Json.Decode.maybe ("duration" := Json.Decode.float))
+        |: ("duration" := Json.Decode.float)
         |: ("autoplay" := Json.Decode.bool)
         |: ("image" := decodeMediaPlayerImage)
         |: ("title" := Json.Decode.string)
-        |: (Json.Decode.maybe ("subtitle" := Json.Decode.string))
+        |: ("subtitle" := Json.Decode.string)
         |: ("volume" := Json.Decode.float)
         |: ("status" := Json.Decode.string)
         |: ("idle" := Json.Decode.bool)
