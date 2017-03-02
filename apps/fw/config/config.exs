@@ -8,8 +8,8 @@ require Logger
 
 config :logger,
   backends: [:console],
-  #compile_time_purge_level: :debug,
-  level: :debug
+  compile_time_purge_level: :info,
+  level: :info
 
 config :sasl, errlog_type: :error
 
