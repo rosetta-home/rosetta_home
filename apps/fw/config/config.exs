@@ -6,11 +6,6 @@
 use Mix.Config
 require Logger
 
-config :logger,
-  backends: [:console],
-  compile_time_purge_level: :info,
-  level: :info
-
 config :sasl, errlog_type: :error
 
 config :nerves, :firmware,

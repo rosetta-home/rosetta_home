@@ -28,7 +28,7 @@ defmodule Interface.Mixfile do
   defp deps do
     [
       {:nerves, github: "nerves-project/nerves", tag: "v0.4.7", override: true},
-      {:cicada, github: "rosetta-home/cicada", override: true},
+      {:cicada, path: Path.expand("/app/rosetta-home/cicada", __DIR__), override: true},#{:cicada, github: "rosetta-home/cicada", override: true},
       {:cowboy, "~> 1.0"},
       {:mdns, "~> 0.1.5"},
       {:poison, "~> 3.0", override: true},

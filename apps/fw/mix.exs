@@ -57,14 +57,14 @@ defmodule Fw.Mixfile do
       {:nerves_firmware_http, github: "nerves-project/nerves_firmware_http", only: :prod},
       {:distillery, "~> 1.1.2"},
       {:poison, "~> 3.0", override: true},
-      {:cicada, github: "rosetta-home/cicada", override: true},
+      {:cicada, path: Path.expand("/app/rosetta-home/cicada", __DIR__), override: true},
       {:interface, in_umbrella: true},
-      {:rosetta_home_chromecast, github: "rosetta-home/rosetta_home_chromecast"},
+      {:rosetta_home_chromecast, path: Path.expand("/app/rosetta-home/rosetta_home_chromecast", __DIR__), override: true},#github: "rosetta-home/rosetta_home_chromecast"},
       {:rosetta_home_radio_thermostat, github: "rosetta-home/rosetta_home_radio_thermostat"},
       {:rosetta_home_ieq_sensor, github: "rosetta-home/rosetta_home_ieq_sensor"},
-      {:rosetta_home_lifx, github: "rosetta-home/rosetta_home_lifx"},
+      {:rosetta_home_lifx, path: Path.expand("/app/rosetta-home/rosetta_home_lifx", __DIR__)},#github: "rosetta-home/rosetta_home_lifx"},
       {:rosetta_home_raven_smcd, github: "rosetta-home/rosetta_home_raven_smcd"},
-      {:rosetta_home_meteo_stick, github: "rosetta-home/rosetta_home_meteo_stick"},
+      {:rosetta_home_meteo_stick, github: "rosetta-home/rosetta_home_meteo_stick"}
     ]
   end
   def system("rpi3", :prod) do

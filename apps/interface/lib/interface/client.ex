@@ -17,13 +17,17 @@ defmodule Interface.Client do
       ttl: 120,
       type: :a
     })
-    {:ok, %{}}
+    {:ok, %{started: false}}
   end
 
-  def handle_info(%NM{interface: %NMInterface{settings: %{ipv4_address: address}, status: %{operstate: :up}}}, state) do
-    Logger.info "mDNS IP Set: #{inspect address}"
-    Mdns.Server.set_ip(address)
-    Mdns.Server.start
+  def handle_info(%NM{interface: %NMInterface{settings: %{ipv4_address: address}}, bound: true}, %{started: started} = state) do
+    Logger.info "mDNS IP Set: #{address}"
+    {:ok, ip} = '#{address}' |> :inet.parse_address
+    Mdns.Server.set_ip(ip)
+    case started do
+      false -> Mdns.Server.start
+      true -> nil
+    end
     {:noreply, state}
   end
 
