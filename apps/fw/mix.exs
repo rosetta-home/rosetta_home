@@ -33,7 +33,7 @@ defmodule Fw.Mixfile do
    ]
   end
 
-  defp applications(:prod), do: [:nerves, :nerves_system_rpi3, :nerves_firmware_http, :distillery]
+  defp applications(:prod), do: [:nerves, :nerves_system_rpi3, :nerves_firmware_http, :distillery, :runtime_tools]
   defp applications(_), do: []
 
   defp general_applications() do
@@ -59,7 +59,7 @@ defmodule Fw.Mixfile do
       {:poison, "~> 3.0", override: true},
       {:cicada, path: Path.expand("/app/rosetta-home/cicada", __DIR__), override: true},
       {:interface, in_umbrella: true},
-      {:rosetta_home_chromecast, path: Path.expand("/app/rosetta-home/rosetta_home_chromecast", __DIR__), override: true},#github: "rosetta-home/rosetta_home_chromecast"},
+      {:rosetta_home_chromecast, github: "rosetta-home/rosetta_home_chromecast"},
       {:rosetta_home_radio_thermostat, github: "rosetta-home/rosetta_home_radio_thermostat"},
       {:rosetta_home_ieq_sensor, github: "rosetta-home/rosetta_home_ieq_sensor"},
       {:rosetta_home_lifx, path: Path.expand("/app/rosetta-home/rosetta_home_lifx", __DIR__)},#github: "rosetta-home/rosetta_home_lifx"},

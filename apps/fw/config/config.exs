@@ -8,6 +8,8 @@ require Logger
 
 config :sasl, errlog_type: :error
 
+config :logger, :console, level: :info
+
 config :nerves, :firmware,
   fwup_conf: "config/rpi3/fwup.conf",
   rootfs_additions: "config/rpi3/rootfs-additions"
