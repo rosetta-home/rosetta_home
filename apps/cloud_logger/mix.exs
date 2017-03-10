@@ -19,7 +19,7 @@ defmodule CloudLogger.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
-    [extra_applications: [:logger],
+    [extra_applications: [:logger, :gen_mqtt, :poison],
      mod: {CloudLogger.Application, []}]
   end
 
@@ -39,6 +39,8 @@ defmodule CloudLogger.Mixfile do
   defp deps do
     [
       {:cicada, path: Path.expand("/app/rosetta-home/cicada", __DIR__), override: true},#{:cicada, github: "rosetta-home/cicada", override: true},
+      {:gen_mqtt, "~> 0.3.1"},
+      {:poison, "~> 3.0", override: true},
     ]
   end
 end

@@ -8,7 +8,10 @@ require Logger
 
 config :sasl, errlog_type: :error
 
-config :logger, :console, level: :info
+config :logger,
+  backends: [:console],
+  level: :info,
+  compile_time_purge_level: :info
 
 config :nerves, :firmware,
   fwup_conf: "config/rpi3/fwup.conf",

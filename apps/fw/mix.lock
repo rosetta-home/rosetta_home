@@ -38,7 +38,7 @@
   "radio_thermostat": {:git, "https://github.com/NationalAssociationOfRealtors/radio_thermostat.git", "1e515b070c879ae84e5d7b7ff50351e589462d03", []},
   "ranch": {:hex, :ranch, "1.3.2", "e4965a144dc9fbe70e5c077c65e73c57165416a901bd02ea899cfd95aa890986", [:rebar3], []},
   "raven_smcd": {:hex, :raven_smcd, "0.2.0", "b81140550b06adefd21056f3bfd23aa46394bd245bba67fb6970ff8dbb24e4f5", [:mix], [{:nerves_uart, "~> 0.1.1", [hex: :nerves_uart, optional: false]}, {:sweet_xml, "~> 0.6.1", [hex: :sweet_xml, optional: false]}]},
-  "rosetta_home_chromecast": {:git, "https://github.com/rosetta-home/rosetta_home_chromecast.git", "2c736b75feab7c4fac844faa6a7f61d704ec0a95", []},
+  "rosetta_home_chromecast": {:git, "https://github.com/rosetta-home/rosetta_home_chromecast.git", "9cace5460212e9d83aea8505d1361f1634daceba", []},
   "rosetta_home_ieq_sensor": {:git, "https://github.com/rosetta-home/rosetta_home_ieq_sensor.git", "9175740bb80f6913972130e11fca4166cdbd501d", []},
   "rosetta_home_lifx": {:git, "https://github.com/rosetta-home/rosetta_home_lifx.git", "a41447b7110950d2d65ce69206d5f88bd57edfbf", []},
   "rosetta_home_meteo_stick": {:git, "https://github.com/rosetta-home/rosetta_home_meteo_stick.git", "14fff441640e80be1171cfd96049a99a300777ad", []},
