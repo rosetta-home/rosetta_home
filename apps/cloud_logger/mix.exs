@@ -38,7 +38,7 @@ defmodule CloudLogger.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:cicada, path: Path.expand("/app/rosetta-home/cicada", __DIR__), override: true},#{:cicada, github: "rosetta-home/cicada", override: true},
+      {:cicada, github: "rosetta-home/cicada", override: true},
       {:gen_mqtt, "~> 0.3.1"},
       {:poison, "~> 3.0", override: true},
     ]
