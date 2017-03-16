@@ -24,3 +24,5 @@ erl_crash.dump
 _images
 
 priv/ssl/*
+
+*prod.env

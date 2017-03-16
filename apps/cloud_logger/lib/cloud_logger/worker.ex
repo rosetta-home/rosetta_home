@@ -8,7 +8,7 @@ defmodule CloudLogger.Worker do
   end
 
   def init(:ok) do
-    Process.send_after(self(), :send_data, 1000)
+    Process.send_after(self(), :send_data, 10000)
     {:ok, %{}}
   end
 
@@ -22,7 +22,7 @@ defmodule CloudLogger.Worker do
       end)
     Logger.info "#{inspect devices}"
     devices |> CloudLogger.MQTT.send
-    Process.send_after(self(), :send_data, 10*1000)
+    Process.send_after(self(), :send_data, 60*1000)
     {:noreply, state}
   end
 
