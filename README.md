@@ -1,51 +1,34 @@
-# Example FW
+# Rosetta Home 2.0
 
-## Installation
-* Install build-essential
-* Install libmnl-dev
-* Install Erlang
-  * Install erlang-esl
-  * Install erlang-dev
-  * Install erlang-xmerl
-  * Install erlang-os-mon
-  * Install erlang-src
-  * Install erlang-eunit
-  * Install erlang-parsetools
-* Install Elixir 1.4
-* Install Nerves
-  * Install fwup
-  * Install ssh-askpass
-  * Install squashfs-tool
-  * Install rebar and hex
-  * Install bootstrap
-* Install Node >= 6.1
-* Install Elm 0.17.1
+Rosetta Home 2.0 is an open source Apache 2.0 licensed home automation system built with security and privacy in mind. This means it has an offline first mentality, no internet required. Cloud connectivity is optional for data backup and more in-depth data analysis. You are not locked into any one cloud provider. Out of the box we support encrypted MQTT backends on port `4883`. [Brood](https://github.com/rosetta-home/brood) provides all the necessary infrastructure for hosting your own cloud based backend.
+
+It offers a zero-configuration installation, meaning it will attempt to auto-discover as many devices on your network as possible. The system works with a plethora of consumer products for lighting, HVAC, media playback, energy monitoring and weather monitoring. It also works with [CRT Labs](https://crtlabs.org) open source [IEQ (Indoor Environmental Quality) sensors](https://github.com/NationalAssociationOfRealtors/IndoorAirQualitySensor).
+
+For an overview of the system, see the slides from [Erlang & Elixir Factory SF Bay 2017](https://docs.google.com/presentation/d/1ebwoJh2H1aQTldHATP0jEGBsT74Yr3dEMmRqTPQvQec/pub?start=false&loop=false&delayms=30000)
+
+The system itself runs on a [Raspberry Pi](https://www.raspberrypi.org/) and utilizes several USB dongles to communicate with a multitude of devices over differing protocols. Network connectivity is provided over WiFi or ethernet.
+
+For installation instructions please see the [installation instructions](/INSTALL.md)
+
+Here are some screen shots of the LAN interface.
+
+**IEQ**
+
+![Scolling Graphs](/assets/RosettaHome2.0.gif)
 
 
-## Setup
-`cp default.env .env`
+**Lighting Control**
 
-change cipher keys to random 10 digits
+![Lights](/assets/lights.png)
 
-`source .env`
+**HVAC Control**
 
-## Build Web UI
-`cd apps/interface/priv`
+![HVAC](/assets/hvac.png)
 
-`elm-make src/Main.elm --output=app.js`
+**Media Player**
 
-## Running locally
-`MIX_ENV=dev mix do deps.get, deps.compile`
+![Media Player](/assets/media_player.png)
 
-`MIX_ENV=dev mix compile`
+**Weather Stations**
 
-`MIX_ENV=dev iex -S mix`
-
-## Build Firmware
-`cd apps/fw`
-
-`MIX_ENV=prod mix do deps.get, deps.compile`
-
-`MIX_ENV=prod mix firmware`
-
-`MIX_ENV=prod mix firmware.burn`
+![Weather Stations](/assets/weather_stations.png)

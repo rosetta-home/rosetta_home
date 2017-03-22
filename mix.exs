@@ -1,4 +1,4 @@
-defmodule Cherp.Mixfile do
+defmodule RosettaHome.Mixfile do
   use Mix.Project
 
   def project do
