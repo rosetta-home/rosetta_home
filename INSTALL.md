@@ -4,7 +4,7 @@ The installation steps below have only been tested with Ubuntu 14.04 and 16.04.
 
 Following the installation steps below will allow you to run Rosetta Home locally as well as build the system for a [Raspberry Pi 3 Model B](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/)
 
-The much easier path is to just download the [pre-built firmware]() and burn it with `mix firmware.burn` this still requires you to install Nerves boostrap from the instructions below, but should work on all OS types.
+The much easier path is to just download the [pre-built firmware](https://github.com/rosetta-home/rosetta_home/releases/download/v0.1.0/rosetta_home.fw) and burn it with `mix firmware.burn` this still requires you to install Nerves boostrap from the instructions below, but should work on all OS types.
 
 Once burned and installed on a Raspberry Pi, you can follow the [setup](/SETUP.md) instructions for getting the system on WiFi.
 
