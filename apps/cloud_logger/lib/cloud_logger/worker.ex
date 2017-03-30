@@ -16,6 +16,7 @@ defmodule CloudLogger.Worker do
     devices = DeviceManager.Client.snapshot() |> Enum.map(fn device ->
       %{ device | device: Map.delete(device.device, :device_pid)}
     end)
+    DeviceManager.Client.reset_histogram()
     Logger.info "#{inspect devices}"
     devices |> CloudLogger.MQTT.send
     Process.send_after(self(), :send_data, 60*1000)
