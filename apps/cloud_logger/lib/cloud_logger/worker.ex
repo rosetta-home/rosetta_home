@@ -2,6 +2,7 @@ defmodule CloudLogger.Worker do
   use GenServer
   require Logger
   alias Cicada.DeviceManager
+  alias Cicada.DeviceManager.Device.Histogram
 
   def start_link do
     GenServer.start_link(__MODULE__, :ok, name: __MODULE__)
@@ -13,10 +14,15 @@ defmodule CloudLogger.Worker do
   end
 
   def handle_info(:send_data, state) do
-    devices = DeviceManager.Client.snapshot() |> Enum.map(fn device ->
-      %{ device | device: Map.delete(device.device, :device_pid)}
+    devices = DeviceManager.devices |> Enum.flat_map(fn {pid, module, device} ->
+      values = Histogram.snapshot(device.histogram)
+      Histogram.reset(device.histogram)
+      d =
+        module.device(pid)
+        |> Map.delete(:device_pid)
+        |> Map.delete(:histogram)
+      %{values: values, device: d}
     end)
-    DeviceManager.Client.reset_histogram()
     Logger.info "#{inspect devices}"
     devices |> CloudLogger.MQTT.send
     Process.send_after(self(), :send_data, 60*1000)
