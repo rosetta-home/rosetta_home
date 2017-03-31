@@ -14,14 +14,14 @@ defmodule CloudLogger.Worker do
   end
 
   def handle_info(:send_data, state) do
-    devices = DeviceManager.devices |> Enum.flat_map(fn {pid, module, device} ->
+    devices = DeviceManager.devices |> Enum.map(fn {pid, module, device} ->
       values = Histogram.snapshot(device.histogram)
       Histogram.reset(device.histogram)
       d =
         module.device(pid)
         |> Map.delete(:device_pid)
         |> Map.delete(:histogram)
-      %{values: values, device: d}
+      %{device: d, values: values}
     end)
     Logger.info "#{inspect devices}"
     devices |> CloudLogger.MQTT.send
