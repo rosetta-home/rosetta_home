@@ -16,6 +16,7 @@ defmodule Fw.Application do
     DeviceManager.Client.register_device(Discovery.MediaPlayer.Chromecast)
     DeviceManager.Client.register_device(Discovery.WeatherStation.MeteoStick)
     DeviceManager.Client.register_device(Discovery.SmartMeter.RavenSMCD)
+    DeviceManager.Client.register_device(Discovery.SmartMeter.Neurio)
     DeviceManager.Client.register_device(Discovery.IEQ.Sensor)
   end
 end
