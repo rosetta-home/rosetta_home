@@ -40,6 +40,7 @@
   "rosetta_home_ieq_sensor": {:git, "https://github.com/rosetta-home/rosetta_home_ieq_sensor.git", "c78a04cc34ea47b7dad8118c827cee36478ea698", []},
   "rosetta_home_lifx": {:git, "https://github.com/rosetta-home/rosetta_home_lifx.git", "e267b39003dab6cbf04ed596aaff45a6e7ffae64", []},
   "rosetta_home_meteo_stick": {:git, "https://github.com/rosetta-home/rosetta_home_meteo_stick.git", "e713daf7d8e713debd5c836126c52a21358ec3f8", []},
+  "rosetta_home_neurio": {:git, "https://github.com/rosetta-home/rosetta_home_neurio.git", "ca90463693e06bcd8e9cbe344a4b4022096a1009", []},
   "rosetta_home_radio_thermostat": {:git, "https://github.com/rosetta-home/rosetta_home_radio_thermostat.git", "0790cf7d85348da71ec06df30b725ed149051ecc", []},
   "rosetta_home_raven_smcd": {:git, "https://github.com/rosetta-home/rosetta_home_raven_smcd.git", "ea60c699dafad270cf7ba2579b392b56d1fcaebd", []},
   "socket": {:hex, :socket, "0.3.11", "46004230045c2207c0b90adb9abe3ba15a83e634b341ac37af39a4adf48ed00b", [:mix], []},
