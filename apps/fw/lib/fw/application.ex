@@ -18,5 +18,6 @@ defmodule Fw.Application do
     DeviceManager.Client.register_device(Discovery.SmartMeter.RavenSMCD)
     DeviceManager.Client.register_device(Discovery.SmartMeter.Neurio)
     DeviceManager.Client.register_device(Discovery.IEQ.Sensor)
+    DeviceManager.Client.start_discovery
   end
 end
