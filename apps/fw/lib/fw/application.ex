@@ -11,13 +11,14 @@ defmodule Fw.Application do
   end
 
   def register_devices do
-    DeviceManager.Client.register_device(Discovery.Light.Lifx)
-    DeviceManager.Client.register_device(Discovery.HVAC.RadioThermostat)
-    DeviceManager.Client.register_device(Discovery.MediaPlayer.Chromecast)
-    DeviceManager.Client.register_device(Discovery.WeatherStation.MeteoStick)
-    DeviceManager.Client.register_device(Discovery.SmartMeter.RavenSMCD)
-    DeviceManager.Client.register_device(Discovery.SmartMeter.Neurio)
-    DeviceManager.Client.register_device(Discovery.IEQ.Sensor)
-    DeviceManager.Client.start_discovery
+    DeviceManager.Registry.start([
+      Discovery.Light.Lifx,
+      Discovery.HVAC.RadioThermostat,
+      Discovery.MediaPlayer.Chromecast,
+      Discovery.WeatherStation.MeteoStick,
+      Discovery.SmartMeter.RavenSMCD,
+      Discovery.SmartMeter.Neurio,
+      Discovery.IEQ.Sensor
+    ])
   end
 end
