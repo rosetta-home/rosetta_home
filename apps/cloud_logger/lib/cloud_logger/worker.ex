@@ -14,11 +14,11 @@ defmodule CloudLogger.Worker do
   end
 
   def handle_info(:send_data, state) do
-    devices = DeviceManager.devices |> Enum.map(fn {pid, module, device} ->
+    devices = DeviceManager.devices |> Enum.map(fn device ->
       values = Histogram.snapshot(device.histogram)
       Histogram.reset(device.histogram)
       d =
-        module.device(pid)
+        device
         |> Map.delete(:device_pid)
         |> Map.delete(:histogram)
       %{device: d, values: values}
