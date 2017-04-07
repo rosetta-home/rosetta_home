@@ -11,7 +11,7 @@ defmodule Fw.Application do
   end
 
   def register_devices do
-    DeviceManager.Registry.start([
+    DeviceManager.Registry.add([
       Discovery.Light.Lifx,
       Discovery.HVAC.RadioThermostat,
       Discovery.MediaPlayer.Chromecast,
