@@ -1,4 +1,5 @@
 defmodule Fw.Application do
+  use Application
   alias Cicada.DeviceManager
   alias Cicada.DeviceManager.{Discovery}
 
