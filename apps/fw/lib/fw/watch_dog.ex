@@ -18,7 +18,7 @@ defmodule Fw.WatchDog do
       nil -> register_devices()
       _ -> nil
     end
-    Process.send_after(self(), :running, 1000)
+    Process.send_after(self(), :running, 13_000)
     {:noreply, state}
   end
 

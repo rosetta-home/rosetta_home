@@ -68,7 +68,7 @@ defmodule Fw.Mixfile do
       {:rosetta_home_lifx, github: "rosetta-home/rosetta_home_lifx"},
       {:rosetta_home_raven_smcd, github: "rosetta-home/rosetta_home_raven_smcd"},
       {:rosetta_home_meteo_stick, github: "rosetta-home/rosetta_home_meteo_stick"},
-      {:rosetta_home_neurio, github: "rosetta-home/rosetta_home_neurio"}
+      {:rosetta_home_neurio, github: "rosetta-home/rosetta_home_neurio"},
     ]
   end
   def system("rpi3", :prod) do
