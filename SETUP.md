@@ -21,7 +21,7 @@ After burning your SD Card follow the instructions below to connect Rosetta Home
 12. Goto http://rosetta.local:8080 in your browser
 13. If http://rosetta.local:8080 isn’t available after a few minutes there’s a chance you mistyped the network password, this means you will have to manually reset the network
 
-## Rest WiFi Credentials
+## Reset WiFi Credentials
 
 1. Plug the raspi into ethernet
 2. Get the ip address from your router or other method
