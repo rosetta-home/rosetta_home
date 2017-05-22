@@ -21,6 +21,7 @@ defmodule CloudLogger.Worker do
         device
         |> Map.delete(:device_pid)
         |> Map.delete(:histogram)
+        |> Map.delete(:timer)
       %{device: d, values: values}
     end)
     Logger.info "#{inspect devices}"
