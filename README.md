@@ -10,11 +10,14 @@ The system itself runs on a [Raspberry Pi](https://www.raspberrypi.org/) and uti
 
 For installation instructions please see the [installation instructions](/INSTALL.md)
 
+**Grafana GUI**
+![Grafana](/assets/rosetta-home-grafana.png)
+
 Here are some screen shots of the LAN interface.
 
 **IEQ**
 
-![Scolling Graphs](/assets/RosettaHome2.0.gif)
+![Scrolling Graphs](/assets/RosettaHome2.0.gif)
 
 
 **Lighting Control**
