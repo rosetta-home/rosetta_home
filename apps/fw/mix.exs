@@ -7,7 +7,7 @@ defmodule Fw.Mixfile do
     [app: :fw,
      version: "0.0.1",
      target: @target,
-     archives: [nerves_bootstrap: "~> 0.4.0"],
+     archives: [nerves_bootstrap: "~> 0.3.1"],
      deps_path: "deps/#{@target}",
      build_path: "_build/#{@target}",
      lockfile: "mix.lock",
@@ -33,7 +33,7 @@ defmodule Fw.Mixfile do
    ]
   end
 
-  defp applications(:prod), do: [:nerves, :nerves_system_rpi3, :nerves_firmware_http, :distillery, :runtime_tools]
+  defp applications(:prod), do: [:nerves, :nerves_system_rpi3, :nerves_firmware_http]
   defp applications(_), do: []
 
   defp general_applications() do
