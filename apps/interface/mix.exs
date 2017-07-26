@@ -27,7 +27,7 @@ defmodule Interface.Mixfile do
 
   defp deps do
     [
-      {:nerves, github: "nerves-project/nerves", tag: "v0.4.7", override: true},
+      {:nerves, "~> 0.6.1", override: true},
       {:cicada, github: "rosetta-home/cicada", override: true},
       {:cowboy, "~> 1.0"},
       {:mdns, "~> 0.1.5"},

@@ -1,13 +1,13 @@
 defmodule Fw.Mixfile do
   use Mix.Project
 
-  @target System.get_env("NERVES_TARGET") || "rpi3"
+  @target System.get_env("NERVES_TARGET") || "rosetta_rpi3"
 
   def project do
     [app: :fw,
      version: "0.0.1",
      target: @target,
-     archives: [nerves_bootstrap: "~> 0.3.1"],
+     archives: [nerves_bootstrap: "~> 0.5.1"],
      deps_path: "deps/#{@target}",
      build_path: "_build/#{@target}",
      lockfile: "mix.lock",
@@ -33,7 +33,7 @@ defmodule Fw.Mixfile do
    ]
   end
 
-  defp applications(:prod), do: [:nerves, :nerves_system_rpi3, :nerves_firmware_http]
+  defp applications(:prod), do: [:nerves, :nerves_firmware_http, :nerves_runtime]
   defp applications(_), do: []
 
   defp general_applications() do
@@ -55,9 +55,10 @@ defmodule Fw.Mixfile do
 
   defp deps do
     [
-      {:nerves, github: "nerves-project/nerves", tag: "v0.4.7", override: true},
+      {:nerves, "~> 0.6.1", override: true},
       {:nerves_firmware_http, github: "nerves-project/nerves_firmware_http", only: :prod},
-      {:distillery, "~> 1.1.2"},
+      {:nerves_runtime, "~> 0.4.0"},
+      {:distillery, "~> 1.2"},
       {:poison, "~> 3.0", override: true},
       {:cicada, github: "rosetta-home/cicada", override: true},
       {:interface, in_umbrella: true},
@@ -71,8 +72,8 @@ defmodule Fw.Mixfile do
       {:rosetta_home_neurio, github: "rosetta-home/rosetta_home_neurio"},
     ]
   end
-  def system("rpi3", :prod) do
-    [{:"nerves_system_rpi3", git: "https://github.com/rosetta-home/nerves_system_rpi3.git", tag: "v0.10.2" }]
+  def system("rosetta_rpi3", :prod) do
+    [{:"rosetta_rpi3", path: "/app/rosetta-home/rosetta_rpi3"}]
   end
   def system(_, _), do: []
 
