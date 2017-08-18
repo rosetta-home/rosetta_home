@@ -45,7 +45,7 @@
   "rosetta_home_lifx": {:git, "https://github.com/rosetta-home/rosetta_home_lifx.git", "2431068757932647dd1969e20d46a781e7f83919", []},
   "rosetta_home_meteo_stick": {:git, "https://github.com/rosetta-home/rosetta_home_meteo_stick.git", "cfa11f8d2726b0fedb0dbaa1de4215f69ca6501c", []},
   "rosetta_home_neurio": {:git, "https://github.com/rosetta-home/rosetta_home_neurio.git", "c71d0ac0c6beb2f4daa1927707ac5079c9fb0f14", []},
-  "rosetta_home_radio_thermostat": {:git, "https://github.com/rosetta-home/rosetta_home_radio_thermostat.git", "1ec275b8999220721b1f465525f7d5454af34646", []},
+  "rosetta_home_radio_thermostat": {:git, "https://github.com/rosetta-home/rosetta_home_radio_thermostat.git", "c90594141df8b8eb0693b6cb8d3c93a4122ecc27", []},
   "rosetta_home_raven_smcd": {:git, "https://github.com/rosetta-home/rosetta_home_raven_smcd.git", "e3e74c99a974fb77afd1694337ed00e2ef9a8f84", []},
   "socket": {:hex, :socket, "0.3.12", "4a6543815136503fee67eff0932da1742fad83f84c49130c854114153cc549a6", [:mix], [], "hexpm"},
   "ssdp": {:hex, :ssdp, "0.1.7", "df31725a7caf4bba273c1bb26e4747c55162068cf77959c709689845a49b2733", [:mix], [{:httpoison, "~> 0.11.1", [hex: :httpoison, repo: "hexpm", optional: false]}, {:poison, "~> 3.1", [hex: :poison, repo: "hexpm", optional: false]}, {:sweet_xml, "~> 0.6.5", [hex: :sweet_xml, repo: "hexpm", optional: false]}], "hexpm"},
