@@ -65,7 +65,7 @@ defmodule Fw.Mixfile do
       {:interface, in_umbrella: true},
       {:cloud_logger, in_umbrella: true},
       {:automation, in_umbrella: true},
-      {:rosetta_home_radio_thermostat, github: "rosetta-home/rosetta_home_radio_thermostat"},
+      {:rosetta_home_radio_thermostat,  github: "rosetta-home/rosetta_home_radio_thermostat"},
       {:rosetta_home_chromecast, github: "rosetta-home/rosetta_home_chromecast"},
       {:rosetta_home_ieq_sensor, github: "rosetta-home/rosetta_home_ieq_sensor"},
       {:rosetta_home_lifx, github: "rosetta-home/rosetta_home_lifx"},
