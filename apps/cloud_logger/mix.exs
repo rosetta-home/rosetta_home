@@ -20,7 +20,8 @@ defmodule CloudLogger.Mixfile do
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
     [extra_applications: [:logger, :gen_mqtt, :poison],
-     mod: {CloudLogger.Application, []}]
+     mod: {CloudLogger.Application, []}
+    ]
   end
 
   # Dependencies can be Hex packages:

@@ -6,6 +6,9 @@
 use Mix.Config
 require Logger
 
+config :nerves_interim_wifi,
+  regulatory_domain: "US"
+
 config :sasl, errlog_type: :error
 
 config :logger,
