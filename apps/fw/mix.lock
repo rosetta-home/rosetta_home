@@ -1,6 +1,6 @@
 %{"certifi": {:hex, :certifi, "1.2.1", "c3904f192bd5284e5b13f20db3ceac9626e14eeacfbb492e19583cf0e37b22be", [:rebar3], []},
   "chromecast": {:hex, :chromecast, "0.1.5", "6ffd7615b2abdee3c2394c7190f18c6fb17d67736c00eca11860fa904552a466", [:mix], [{:exprotobuf, "~> 1.1.0", [hex: :exprotobuf, optional: false]}, {:poison, "~> 2.2.0", [hex: :poison, optional: false]}]},
-  "cicada": {:git, "https://github.com/rosetta-home/cicada.git", "0f0dd6f1f730fff2fd6b5808eaf009963959190a", []},
+  "cicada": {:git, "https://github.com/rosetta-home/cicada.git", "98432961d419292ed0ac3208e0939d10fbf9461a", []},
   "cipher": {:hex, :cipher, "1.3.3", "ed0ea13e8d0ede4f7e70ec9c220aceadbd654af612813c9040c48fd452fc054e", [:mix], [{:plug, ">= 1.1.0", [hex: :plug, optional: false]}, {:poison, "~> 2.0 or ~> 3.0", [hex: :poison, optional: false]}]},
   "cowboy": {:hex, :cowboy, "1.1.2", "61ac29ea970389a88eca5a65601460162d370a70018afe6f949a29dca91f3bb0", [:rebar3], [{:cowlib, "~> 1.0.2", [hex: :cowlib, optional: false]}, {:ranch, "~> 1.3.2", [hex: :ranch, optional: false]}]},
   "cowlib": {:hex, :cowlib, "1.0.2", "9d769a1d062c9c3ac753096f868ca121e2730b9a377de23dec0f7e08b1df84ee", [:make], []},
