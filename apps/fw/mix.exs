@@ -48,7 +48,7 @@ defmodule Fw.Mixfile do
   end
 
   def deps do
-    [{:nerves, "~> 0.7", runtime: false},
+    [{:nerves, "~> 0.7"},
      {:poison, "~> 3.0", override: true},
      {:cicada, github: "rosetta-home/cicada", override: true},
      {:interface, in_umbrella: true},
