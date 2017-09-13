@@ -17,8 +17,8 @@ config :logger,
   compile_time_purge_level: :info
 
 config :nerves, :firmware,
-  fwup_conf: "config/rpi3/fwup.conf",
-  rootfs_additions: "config/rpi3/rootfs-additions"
+  fwup_conf: "config/rpi0/fwup.conf",
+  rootfs_additions: "config/rpi0/rootfs-additions"
 
 config :cipher,
   keyphrase: System.get_env("CIPHER_KEYPHRASE"),
