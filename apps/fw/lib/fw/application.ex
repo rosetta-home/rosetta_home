@@ -1,10 +1,21 @@
 defmodule Fw.Application do
   use Application
+  alias Cicada.DeviceManager
+  alias Cicada.DeviceManager.{Discovery}
 
   def start(_type, _args) do
-    import Supervisor.Spec, warn: false
-    children = [worker(Fw.WatchDog, [])]
-    opts = [strategy: :one_for_one, name: Fw.Supervisor]
-    Supervisor.start_link(children, opts)
+    register_devices()
+  end
+
+  def register_devices do
+    DeviceManager.register_plugins([
+      #Discovery.Light.Lifx,
+      Discovery.HVAC.RadioThermostat,
+      #Discovery.MediaPlayer.Chromecast,
+      Discovery.WeatherStation.MeteoStick,
+      Discovery.SmartMeter.RavenSMCD,
+      Discovery.SmartMeter.Neurio,
+      Discovery.IEQ.Sensor
+    ])
   end
 end

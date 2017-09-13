@@ -20,10 +20,10 @@ defmodule Fw.Mixfile do
 
   def application, do: application(@target)
 
-  def application(_target) do
+  def application(target) do
     [
       mod: {Fw.Application, []},
-      extra_applications: [:logger],
+      extra_applications: [:logger] ++ applications(target),
       env: [
         cipher: [
           keyphrase: System.get_env("CIPHER_KEYPHRASE"),
@@ -32,6 +32,18 @@ defmodule Fw.Mixfile do
         ],
         sasl: [errlog_type: :error],
       ]
+   ]
+  end
+
+  def applications(_target) do
+    [:cicada,
+     :interface,
+     :cloud_logger,
+     :rosetta_home_radio_thermostat,
+     :rosetta_home_ieq_sensor,
+     :rosetta_home_raven_smcd,
+     :rosetta_home_meteo_stick,
+     :rosetta_home_neurio
    ]
   end
 
