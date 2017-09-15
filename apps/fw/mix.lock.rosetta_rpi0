@@ -45,6 +45,7 @@
   "rosetta_home_neurio": {:git, "https://github.com/rosetta-home/rosetta_home_neurio.git", "51e77b04f43649dca043c736af316108c15f89cf", []},
   "rosetta_home_radio_thermostat": {:git, "https://github.com/rosetta-home/rosetta_home_radio_thermostat.git", "228d722da005b85fba3e6d1988a9c87c2e94e34a", []},
   "rosetta_home_raven_smcd": {:git, "https://github.com/rosetta-home/rosetta_home_raven_smcd.git", "e3e74c99a974fb77afd1694337ed00e2ef9a8f84", []},
+  "rosetta_rpi0": {:hex, :rosetta_rpi0, "0.17.1", "81fed1f082f890a1488c1c00b18b43143f0b6ff84d7c8f6188435715c9e6878b", [], [{:nerves, "~> 0.7", [hex: :nerves, repo: "hexpm", optional: false]}, {:nerves_system_br, "~> 0.13.7", [hex: :nerves_system_br, repo: "hexpm", optional: false]}, {:nerves_toolchain_armv6_rpi_linux_gnueabi, "~> 0.11.0", [hex: :nerves_toolchain_armv6_rpi_linux_gnueabi, repo: "hexpm", optional: false]}], "hexpm"},
   "socket": {:hex, :socket, "0.3.12", "4a6543815136503fee67eff0932da1742fad83f84c49130c854114153cc549a6", [:mix], [], "hexpm"},
   "ssdp": {:hex, :ssdp, "0.1.7", "df31725a7caf4bba273c1bb26e4747c55162068cf77959c709689845a49b2733", [:mix], [{:httpoison, "~> 0.11.1", [hex: :httpoison, repo: "hexpm", optional: false]}, {:poison, "~> 3.1", [hex: :poison, repo: "hexpm", optional: false]}, {:sweet_xml, "~> 0.6.5", [hex: :sweet_xml, repo: "hexpm", optional: false]}], "hexpm"},
   "ssl_verify_fun": {:hex, :ssl_verify_fun, "1.1.1", "28a4d65b7f59893bc2c7de786dec1e1555bd742d336043fe644ae956c3497fbe", [:make, :rebar], [], "hexpm"},

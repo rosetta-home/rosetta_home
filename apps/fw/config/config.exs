@@ -6,6 +6,22 @@
 use Mix.Config
 require Logger
 
+config :bootloader,
+  overlay_path: "/tmp/erl_bootloader",
+  init: [
+    :nerves_firmware_http,
+    :nerves_runtime,
+    :cicada,
+    :interface,
+    :cloud_logger,
+    :rosetta_home_radio_thermostat,
+    :rosetta_home_ieq_sensor,
+    :rosetta_home_raven_smcd,
+    :rosetta_home_meteo_stick,
+    :rosetta_home_neurio
+  ],
+  app: :fw
+
 config :nerves_interim_wifi,
   regulatory_domain: "US"
 
@@ -16,8 +32,9 @@ config :logger,
   level: :info,
   compile_time_purge_level: :info
 
+
 config :nerves, :firmware,
-  rootfs_additions: "config/rpi0/rootfs-additions"
+  rootfs_overlay: "config/rpi0/rootfs_overlay"
 
 config :cipher,
   keyphrase: System.get_env("CIPHER_KEYPHRASE"),
