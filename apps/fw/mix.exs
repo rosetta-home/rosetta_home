@@ -60,7 +60,7 @@ defmodule Fw.Mixfile do
   end
 
   def system("rosetta_rpi3"), do: {:"rosetta_rpi3", path: "/app/rosetta-home/rosetta_rpi3", runtime: false}
-  def system("rosetta_rpi0"), do: {:"rosetta_rpi0", path: "/app/rosetta-home/rosetta_rpi0", runtime: false}
+  def system("rosetta_rpi0"), do: {:rosetta_rpi0, "~> 0.17.2", runtime: false}
 
   def aliases("host"), do: []
   def aliases(_target) do
