@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="./static/css/connectory_styles.css"></link>
+    <script src="./static/js/d3-4.11.0.min.js"></script>
+    <script src="./static/js/d3-scale-chromatic.min.js"></script>
+    <title>Rosetta Home</title>
+  </head>
+  <body>
+    <canvas id="graph" width="1000px" height="800px"></canvas>
+    <script>
+      var hues = [
+        d3.interpolateBuGn,
+        d3.interpolateBuPu,
+        d3.interpolateGnBu,
+        d3.interpolateOrRd,
+        d3.interpolatePuBuGn,
+        d3.interpolatePuBu,
+        d3.interpolatePuRd,
+        d3.interpolateRdPu,
+        d3.interpolateYlGnBu,
+        d3.interpolateYlGn,
+        d3.interpolateYlOrBr,
+        d3.interpolateYlOrRd,
+        d3.interpolateSpectral,
+        d3.interpolateRdYlGn,
+        d3.interpolateRdYlBu,
+        d3.interpolateRdGy,
+        d3.interpolateRdBu,
+        d3.interpolatePuOr,
+        d3.interpolatePiYG,
+        d3.interpolatePRGn,
+        d3.interpolateBrBG,
+      ]
+      var canvas = document.querySelector("canvas"),
+        context = canvas.getContext("2d");
+      var w_w = window.innerWidth,
+        w_h = window.innerHeight;
+      canvas.width = w_w;
+      canvas.height = w_h;
+      var width = canvas.width,
+        height = canvas.height
+      var x = d3.scaleLinear()
+        .range([0, width]);
+      var y = d3.scaleLinear()
+        .range([200, 0]);
+      var lines = [],
+        data = random_data(),
+        current_line = 0,
+        total_lines = 100,
+        last = 0,
+        point_dir = [],
+        x_range = 15,
+        y_range = 25,
+        step = .01,
+        paused = false,
+        pause_duration = 2000,
+        color_pallette = hues[Math.floor(Math.random()*hues.length)];
+
+      x.domain([0, x_range]);
+      y.domain([0, y_range]);
+
+      for(var d = 0; d < data.length; d++){
+        point_dir[d] = {x: Math.random() >= .5 ? 1 : -1, y: Math.random() >= .5 ? 1 : -1};
+      }
+
+      for(var i = 0; i < total_lines; i++){
+        lines[i] = d3.line()
+          .x(function(d) { return x(d.x); })
+          .y(function(d) { return y(d.y); })
+          //.curve(d3.curveBundle)
+          .context(context);
+      }
+
+      function render(){
+        var d_p = [];
+        for(var d = 0; d < data.length; d++){
+          d_p[d] = {x: data[d].x + ((current_line*step)*point_dir[d].x), y: data[d].y + ((current_line*step)*point_dir[d].y)};
+        }
+        context.beginPath();
+        lines[current_line](d_p);
+        context.lineWidth = 1;
+        var color = color_pallette((current_line/total_lines));
+        context.strokeStyle = color;
+        context.shadowBlur = 0;
+        context.shadowColor = "steelblue";
+        context.setLineDash([1,3])
+        context.stroke();
+        context.closePath();
+      }
+
+      function random_data(){
+        var dat = [];
+        for(var i = 0; i < x_range; i++){
+          dat[i] = {x: i, y: Math.random()*y_range}
+        }
+        return dat;
+      }
+
+      function animate(ts){
+        last = ts;
+        render();
+        if(current_line < (total_lines-1)){
+          current_line++;
+        }else{
+          paused = true;
+          current_line = 0;
+          data = random_data();
+          for(var d = 0; d < data.length; d++){
+            point_dir[d] = {x: Math.random() >= .5 ? 1 : -1, y: Math.random() >= .5 ? 1 : -1};
+          }
+        }
+        if(paused){
+          setTimeout(function(){
+            requestAnimationFrame(animate);
+            paused = false;
+            context.clearRect(0, 0, width, height);
+            color_pallette = hues[Math.floor(Math.random()*hues.length)]
+          }, pause_duration);
+        }else{
+          requestAnimationFrame(animate);
+        }
+
+      }
+      requestAnimationFrame(animate);
+    </script>
+  </body>
+</html>
