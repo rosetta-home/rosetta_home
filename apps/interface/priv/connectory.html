@@ -10,11 +10,21 @@
     <script src="./static/js/d3-selection.min.js"></script>
     <script src="./static/js/d3-selection-multi.min.js"></script>
     <script src="./static/js/d3-transition.min.js"></script>
+    <script src="./static/js/d3-axis.min.js"></script>
+    <script src="./static/js/d3-scale.min.js"></script>
     <title>Rosetta Home</title>
   </head>
   <body>
-    <div id="animate"></div>
-    <canvas id="graph" width="1000px" height="800px"></canvas>
+    <div id="animate">
+      <div id="text">
+        <h1 id="title">Humidity</h1>
+        <ul id="values">
+          <li class="hist" id="min">min: 35</li>
+          <li class="hist" id="median">med: 37.3453</li>
+          <li class="hist" id="max">max: 39.87986</li>
+        </div>
+      </div>
+    </div>
     <script>
       var hues = [
         d3.interpolateBuGn,
@@ -39,37 +49,46 @@
         d3.interpolatePRGn,
         d3.interpolateBrBG,
       ]
-      var canvas = document.querySelector("canvas"),
-        context = canvas.getContext("2d"),
-        viz_height = 250,
-        bg = canvas.getContext("2d");
-      var w_w = window.innerWidth,
-        w_h = window.innerHeight;
-      canvas.width = w_w;
-      canvas.height = w_h;
-      var width = canvas.width,
-        height = canvas.height
+      var measurements = [
+        "Humidity",
+        "Temperature",
+        "KWh",
+        "CO2",
+        "PM 2.5",
+        "Wind Speed",
+        "VOC"
+      ]
+      var viz_height = 250,
+        width = window.innerWidth,
+        height = window.innerHeight;
       var x = d3.scaleLinear()
         .range([0, width]);
       var v_top = (height - viz_height)/2;
-      console.log(v_top);
       var y = d3.scaleLinear()
         .range([v_top, v_top+viz_height]);
-      var x_range = 100,
+      var x_range = 120,
+        bucket_size = 6, //hours
         y_range = 25,
+        today = new Date(),
+        start_date = today.getTime() - (x_range*bucket_size*60*60*1000),
         data = random_data(),
         current_line = 0,
-        total_lines = 400,
+        total_lines = 100,
         last = 0,
-        step = .02,
+        x_step = .03, //bucket_size*60*1000,
+        y_step = .03,
         paused = false,
         pause_duration = 3000,
         point_dir = {x: 1, y: -1},
         line_dash = [1,3],
         color_pallette = hues[Math.floor(Math.random()*hues.length)];
 
-      bg.fillStyle = color_pallette(1);
-      bg.fillRect(0, 0, width, height);
+      var bg = document.getElementById("animate");
+      var title = document.getElementById("title");
+      var hist = document.getElementsByClassName("hist");
+      var min = document.getElementById("min");
+      var median = document.getElementById("median");
+      var max = document.getElementById("max");
 
       var svg = d3.select("#animate")
         .append("svg")
@@ -80,38 +99,36 @@
           xmlns: "http://www.w3.org/2000/svg"
         });
 
-      x.domain([0, x_range]);
+      x.domain([0, x_range]); //start_date+(x_range*bucket_size*60*60*1000)]);
       y.domain([0, y_range]);
+
+      var x_domain = d3.scaleTime()
+        .domain([new Date(start_date), new Date(start_date+(x_range*bucket_size*60*60*1000))])
+        .range([0, width]);
+
+      var x_axis = d3.axisBottom(x_domain)
+        .ticks(10)
 
       var line = d3.line()
         .x(function(d) { return x(d.x); })
         .y(function(d) { return y(d.y); })
         .curve(d3.curveBundle)
-        .context(context);
+
+      var line_straight = d3.line()
+        .x(function(d) { return x(d.x); })
+        .y(function(d) { return y(d.y); })
 
       function render(){
         var d_p = [];
         for(var d = 0; d < data.length; d++){
-          d_p[d] = {x: data[d].x + ((current_line*step)*point_dir.x), y: data[d].y + ((current_line*step)*point_dir.y)};
+          d_p[d] = {x: data[d].x + ((current_line*x_step)*point_dir.x), y: data[d].y + ((current_line*y_step)*point_dir.y)};
         }
-        context.beginPath();
-        line(d_p);
-        context.lineWidth = 1;
-        var color = color_pallette((current_line/total_lines));
-        context.strokeStyle = color;
-        context.shadowBlur = 0;
-        context.shadowColor = color;
-        context.setLineDash(line_dash)
-        context.stroke();
-        context.closePath();
-      }
-
-      function random_data(){
-        var dat = [];
-        for(var i = 0; i < x_range; i++){
-          dat[i] = {x: i, y: Math.random()*y_range}
-        }
-        return dat;
+        var path = svg.append("path")
+          .attr("d", line(d_p))
+          .attr("stroke", color_pallette((current_line/total_lines)))
+          .attr("stroke-width", "1")
+          .attr("stroke-dasharray", line_dash[0] + " " + line_dash[1])
+          .attr("fill", "none");
       }
 
       function animate(ts){
@@ -128,11 +145,7 @@
             point_dir = {x: Math.random() >= .5 ? 1 : -1, y: Math.random() >= .5 ? 1 : -1};
             line_dash = [Math.ceil(Math.random()*3), Math.ceil(Math.random()*5)]
             paused = false;
-            context.clearRect(0, 0, width, height);
-            bg.clearRect(0, 0, width, height);
             color_pallette = hues[Math.floor(Math.random()*hues.length)];
-            bg.fillStyle = color_pallette(1);
-            bg.fillRect(0, 0, width, height);
             animate_line();
           }, pause_duration);
         }else{
@@ -141,20 +154,12 @@
       }
 
       function animate_line(){
-        var color = document.getElementById("animate");
-        color.style.backgroundColor = color_pallette(1);
-        color.style.display = "block";
-        var l = d3.line()
-          .x(function(d) { return x(d.x); })
-          .y(function(d) { return y(d.y); })
-          .curve(d3.curveBundle)
-        svg.selectAll("*").remove();
+        set_elements();
         var path = svg.append("path")
-          .attr("d", l(data))
+          .attr("d", line(data))
           .attr("stroke", color_pallette(0))
           .attr("stroke-width", "1")
           .attr("fill", "none");
-
         var tl = path.node().getTotalLength();
         path
           .attr("stroke-dasharray", tl + " " + tl)
@@ -162,14 +167,48 @@
           .transition()
             .duration(5000)
             .attr("stroke-dashoffset", 0)
-
-        setTimeout(function(){
-          requestAnimationFrame(animate);
-          var color = document.getElementById("animate");
-          color.style.display = "none";
-        }, 5000);
+            .on("end", function(){
+              requestAnimationFrame(animate);
+            })
       }
 
+      function set_elements(){
+        svg.selectAll("*").remove();
+        var g = svg.append("g");
+        g.append("g")
+          .attr("transform", "translate(0," + (height-100) + ")")
+          .call(x_axis);
+        g.selectAll(".domain")
+          .attr("stroke", color_pallette(.5))
+          .attr("opacity", .5)
+        g.selectAll(".tick text")
+          .attr("fill", color_pallette(.4))
+          .attr("dy", -20)
+          .attr("opacity", .5);
+        var t_text = measurements[Math.floor(Math.random()*measurements.length)];
+        title.innerHTML = t_text;
+        bg.style.backgroundColor = color_pallette(1);
+        bg.style.display = "block";
+        title.style.color = color_pallette(.5);
+        min.style.color = color_pallette(.5);
+        median.style.color = color_pallette(.5);
+        max.style.color = color_pallette(.5);
+        var minv = d3.min(data, function(d){return d.y;});
+        var maxv = d3.max(data, function(d){return d.y;});
+        var medv = d3.median(data, function(d){return d.y;});
+        min.innerHTML = "MIN: " + minv;
+        median.innerHTML = "MED: " + medv;
+        max.innerHTML = "MAX: " + maxv;
+      }
+
+      function random_data(){
+        var dat = [];
+        for(var i = 0; i < x_range; i++){
+          //dat[i] = {x: start_date+(i*bucket_size*60*60*1000), y: Math.random()*y_range}
+          dat[i] = {x: i, y: Math.random()*y_range}
+        }
+        return dat;
+      }
       animate_line();
     </script>
   </body>
