@@ -6,12 +6,15 @@ defmodule Interface.TCPServer do
       { :_,
         [
           {"/", Interface.UI.Index, []},
+          {"/ui", Interface.UI.V2, []},
+          {"/ws", Interface.WebSocketHandler, []},
           {"/floorplan", Interface.UI.Floorplan, []},
           {"/network", Interface.UI.Network, []},
           {"/connect_network", Interface.UI.ConnectNetwork, []},
           {"/reset_network", Interface.UI.ResetNetwork, []},
           {"/app.js", :cowboy_static, {:priv_file, :interface, "app.js"}},
           {"/static/[...]", :cowboy_static, {:priv_dir,  :interface, "static"}},
+          {"/build/[...]", :cowboy_static, {:priv_dir,  :interface, "ui/build"}},
 
         ]}
       ])

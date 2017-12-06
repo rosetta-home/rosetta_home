@@ -1,20 +1,6 @@
 
 import * as types from './types'
 
-export function addTodo(text) {
-	return {
-		type: types.ADD_TODO,
-		text
-	};
-}
-
-export function removeTodo(todo) {
-	return {
-		type: types.REMOVE_TODO,
-		todo
-	};
-}
-
 export function sendAction(action, payload) {
 	return {
 		type: types.SEND_ACTION,
