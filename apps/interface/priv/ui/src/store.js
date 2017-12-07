@@ -56,7 +56,7 @@ const INITIAL = {
 	hvac: {},
   ieq: {},
   weather_station: {},
-  energy: {},
+  smart_meter: {},
 };
 
 export default createStore( (state, action) => (
