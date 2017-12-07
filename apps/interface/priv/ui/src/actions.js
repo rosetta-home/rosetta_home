@@ -1,6 +1,12 @@
 
 import * as types from './types'
 
+export function updateData() {
+	return {
+		type: types.UPDATE_DATA
+	};
+}
+
 export function sendAction(action, payload) {
 	return {
 		type: types.SEND_ACTION,

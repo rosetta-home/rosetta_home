@@ -13,13 +13,15 @@ export default class Sensor extends Component {
     var title_text = "";
     title_text = title + " | " + value.interface_pid;
     for(var k in value.state){
-      var tag = k.split("_").map((word) => word.charAt().toUpperCase() + word.substr(1))
-      out.push(
-        <List.Item>
-          <List.PrimaryText>{tag.join(" ")}: &nbsp;</List.PrimaryText>
-          <List.SecondaryText>{value.state[k]}</List.SecondaryText>
-        </List.Item>
-      );
+      if(graph_var.indexOf(k) != -1){
+        var tag = k.split("_").map((word) => word.charAt().toUpperCase() + word.substr(1))
+        out.push(
+          <List.Item>
+            <List.PrimaryText>{tag.join(" ")}: &nbsp;</List.PrimaryText>
+            <List.SecondaryText>{value.state[k]}</List.SecondaryText>
+          </List.Item>
+        );
+      }
     }
     return (
       <Card style={{"background-color": color(.2)}}>

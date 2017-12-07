@@ -26,22 +26,15 @@ export default class Home extends Component {
     ];
   }
 
-  sensor_card = (title, list, name, graph_var, color) => {
-    return (
-      <LayoutGrid.Cell cols="3" desktopCols="3" tabletCols="4" phoneCols="4">
-        <Sensor list={list} title={title} name={name} color={color} graph_var={graph_var} />
-      </LayoutGrid.Cell>
-    )
-  };
-
 	render = ({ ...state }, { text }) => {
 		return (
       <div className="homepage" >
         <LayoutGrid>
           <LayoutGrid.Inner>
-            <DeviceGroup title="HVAC" devices={state.hvac} name="hvac" graph_var="temperature" color={this.hues[4]} />
-            <DeviceGroup title="Memory" devices={state.memory} name="memory" graph_var="allocated" color={this.hues[0]} />
-            <DeviceGroup title="CPU" devices={state.cpu} name="cpu" graph_var="busy" color={this.hues[1]} />
+            <DeviceGroup title="HVAC" devices={state.hvac} name="hvac" graph_var={["temperature", "temporary_target_cool", "temporary_target_heat"]} color={this.hues[4]} />
+            <DeviceGroup title="Weather" devices={state.weather_station} name="weather_station" graph_var={["outdoor_temperature", "indoor_temperature"]} color={this.hues[0]} />
+            <DeviceGroup title="Energy" devices={state.energy} name="energy" graph_var={["kw"]} color={this.hues[2]} />
+            <DeviceGroup title="IEQ" devices={state.ieq} name="ieq" graph_var={["co2", "voc", "pm"]} color={this.hues[1]} />
           </LayoutGrid.Inner>
         </LayoutGrid>
       </div>

@@ -13,7 +13,7 @@ if(!h){
       uri = "ws:";
   }
   uri += "//" + loc.host;
-  uri += loc.pathname + "ws";
+  uri += "/ws";
 }else{
   uri = h
 }

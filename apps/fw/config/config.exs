@@ -34,7 +34,7 @@ config :logger,
 
 
 config :nerves, :firmware,
-  rootfs_overlay: "config/rpi0/rootfs_overlay"
+  rootfs_overlay: "config/rpi3/rootfs_overlay"
 
 config :cipher,
   keyphrase: System.get_env("CIPHER_KEYPHRASE"),

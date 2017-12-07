@@ -39,6 +39,10 @@ html, body {
 	box-sizing: border-box;
 }
 
+.domain{
+  display: none;
+}
+
 html, body{
 	background-color: rgb(200, 200, 200);
 }

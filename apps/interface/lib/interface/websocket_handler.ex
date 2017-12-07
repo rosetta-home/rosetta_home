@@ -15,7 +15,6 @@ defmodule Interface.WebSocketHandler do
 
   def websocket_init(_type, req, _opts) do
     DeviceManager.register
-    SysMon.register
     {:ok, req, %{}, @timeout}
   end
 
@@ -32,24 +31,6 @@ defmodule Interface.WebSocketHandler do
   def websocket_info(:shutdown, req, state) do
     {:shutdown, req, state}
   end
-
-  def websocket_info(%SysMon.Cpu{} = event, req, state) do
-    ws_event = %{
-      type: "DATA_POINT",
-      data_point: %{type: "cpu", interface_pid: "sys_mon-cpu-#{event.cpu}", state: %{busy: event.busy, idle: event.idle, cpu: event.cpu}},
-    }
-    {:ok, data} = Poison.encode(ws_event)
-    {:reply, {:text, data}, req, state}
-  end
-
-  def websocket_info(%SysMon.Memory{} = event, req, state) do
-    ws_event = %{
-      type: "DATA_POINT",
-      data_point: %{type: "memory", interface_pid: "sys_mon-memory", state: %{total: event.total, allocated: event.allocated}},
-    }
-    {:ok, data} = Poison.encode(ws_event)
-    {:reply, {:text, data}, req, state}
-end
 
   def websocket_info(message, req, state) do
     dp = message |> Map.drop([:device_pid, :histogram, :timer])

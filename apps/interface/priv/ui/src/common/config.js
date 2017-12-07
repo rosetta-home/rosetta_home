@@ -6,4 +6,4 @@ export const host = () => {
   }
 }
 
-export const num_data_points = 50;
+export const num_data_points = 120;

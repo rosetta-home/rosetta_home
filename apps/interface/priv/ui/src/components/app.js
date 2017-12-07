@@ -3,6 +3,8 @@ import { Router } from 'preact-router';
 import Header from './header';
 import Home from '../routes/home';
 import Profile from '../routes/profile';
+import { updateData } from '../actions';
+import store from '../store';
 
 export default class App extends Component {
 	/** Gets fired when the route changes.
@@ -13,17 +15,21 @@ export default class App extends Component {
 		this.currentUrl = e.url;
 	};
 
+	componentDidMount = () => {
+		this.interval = setInterval(() => {
+			store.dispatch(updateData());
+		}, 500);
+	};
+
+	componentWillUnmount = () => {
+		clearInterval(this.interval);
+	}
+
 	render = () => {
 		return (
 			<div id="app">
 				<Header />
-				<div class="pages">
-					<Router onChange={this.handleRoute}>
-						<Home path="/" />
-						<Profile path="/profile/" user="me" />
-						<Profile path="/profile/:user" />
-					</Router>
-				</div>
+				<Home />
 			</div>
 		);
 	}

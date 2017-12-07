@@ -10,7 +10,7 @@ export default class DeviceGroup extends Component {
 
   sensor_card = (title, list, name, graph_var, color) => {
     return (
-      <LayoutGrid.Cell cols="3" desktopCols="3" tabletCols="4" phoneCols="4">
+      <LayoutGrid.Cell cols="12" desktopCols="12" tabletCols="8" phoneCols="4">
         <Sensor list={list} title={title} name={name} color={color} graph_var={graph_var} />
       </LayoutGrid.Cell>
     )
@@ -22,12 +22,10 @@ export default class DeviceGroup extends Component {
       out.push(this.sensor_card(title, devices[i], name, graph_var, color))
     }
     return (
-      <LayoutGrid.Cell cols="12" desktopCols="12" tabletCols="8" phoneCols="4">
-        <LayoutGrid>
-          <LayoutGrid.Inner>
-            { out.map((h) => h) }
-          </LayoutGrid.Inner>
-        </LayoutGrid>
+      <LayoutGrid.Cell cols="4" desktopCols="4" tabletCols="4" phoneCols="4">
+        <LayoutGrid.Inner>
+          { out.map((h) => h) }
+        </LayoutGrid.Inner>
       </LayoutGrid.Cell>
     )
 	};
