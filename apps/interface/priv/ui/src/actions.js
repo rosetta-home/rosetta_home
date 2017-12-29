@@ -1,17 +1,9 @@
 
 import * as types from './types'
 
-export function addTodo(text) {
+export function updateData() {
 	return {
-		type: types.ADD_TODO,
-		text
-	};
-}
-
-export function removeTodo(todo) {
-	return {
-		type: types.REMOVE_TODO,
-		todo
+		type: types.UPDATE_DATA
 	};
 }
 

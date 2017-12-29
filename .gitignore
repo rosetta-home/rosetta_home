@@ -26,3 +26,5 @@ _images
 priv/ssl/*
 
 *prod.env
+
+node_modules
