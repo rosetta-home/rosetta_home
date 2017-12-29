@@ -16,7 +16,7 @@ defmodule CloudLogger.MQTT do
   def on_connect(state) do
     client = "Node:#{Cicada.NetworkManager.BoardId.get}"
     Logger.info "MQTT Connected"
-    :ok = GenMQTT.subscribe(self, "node/#{client}/+", 0)
+    :ok = GenMQTT.subscribe(self(), "node/#{client}/+", 0)
     {:ok, state}
   end
 
@@ -25,13 +25,37 @@ defmodule CloudLogger.MQTT do
     {:ok, state}
   end
 
-  def on_publish(["node", client, "request"], message, state) do
-    Logger.info "#{client} Request Received: #{inspect message}"
+  def on_publish(["node", _client, "request"], message, state) do
+    client = "Node:#{Cicada.NetworkManager.BoardId.get}"
+    {reply, state} =
+      case Poison.decode(message) do
+        {:ok, mes} -> mes |> handle_request(state)
+        {:error, er} -> {%{message: er}, state}
+      end
+    CloudLogger.MQTT |> GenMQTT.publish("node/#{client}/response", reply |> Poison.encode!, 0)
     {:ok, state}
   end
 
+  def on_publish(_other, message, state) do
+    Logger.info "Published: #{inspect message}"
+    {:ok, state}
+  end
+
+  def handle_request(%{"type" => "configure_touchstone"} = message, state) do
+    1..3 |> Enum.each(fn _i ->
+      Cicada.DeviceManager.Device.IEQ.Sensor.set_mode(:"Sensor-IEQStation-#{message["payload"]["id"]}", :green)
+      :timer.sleep(300)
+    end)
+    {%{result: :ok}, state}
+  end
+
+  def handle_request(message, state) do
+    Logger.error "Unknown request type: #{inspect message}"
+    {%{result: :error}, state}
+  end
+
   def send(payload) do
-    client = client = "Node:#{Cicada.NetworkManager.BoardId.get}"
+    client = "Node:#{Cicada.NetworkManager.BoardId.get}"
     CloudLogger.MQTT |> GenMQTT.publish("node/#{client}/payload", payload |> Poison.encode!, 0)
   end
 end

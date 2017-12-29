@@ -52,6 +52,7 @@ defmodule Fw.Mixfile do
      {:poison, "~> 3.0", override: true},
      {:cicada, github: "rosetta-home/cicada", override: true},
      {:interface, in_umbrella: true},
+     {:nerves_uart, "~> 1.0", override: true},
      {:cloud_logger, in_umbrella: true},
      {:rosetta_home_radio_thermostat, github: "rosetta-home/rosetta_home_radio_thermostat"},
      {:rosetta_home_chromecast, github: "rosetta-home/rosetta_home_chromecast"},
