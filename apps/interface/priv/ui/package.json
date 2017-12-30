@@ -1,5 +1,5 @@
 {
-  "name": "Rosetta Home",
+  "name": "rosetta_home",
   "version": "1.0.0",
   "description": "Websocket interface for hardware",
   "scripts": {
