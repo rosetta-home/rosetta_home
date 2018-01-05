@@ -14,6 +14,7 @@ defmodule CloudLogger.MQTT do
 
   @host System.get_env("MQTT_HOST")
   @port System.get_env("MQTT_PORT") |> String.to_integer
+  Logger.info @host
 
   def start_link do
     client = Cicada.NetworkManager.BoardId.get
@@ -24,7 +25,7 @@ defmodule CloudLogger.MQTT do
   end
 
   def init(state) do
-    Process.send_after(self(), :register, 2000)
+    Process.send_after(self(), :register, 10000)
     {:ok, state}
   end
 
@@ -38,6 +39,11 @@ defmodule CloudLogger.MQTT do
     message  = %Message{type: "DATA_POINT", data_point: dp}
     CloudLogger.MQTT |> GenMQTT.publish("node/#{state.client}/point", message |> Poison.encode!, 0)
     {:noreply, state}
+  end
+
+  def on_connect_error(er, state) do
+    Logger.error("Error `#{inspect er}` connecting to: #{@host}:#{@port}")
+    {:ok, state}
   end
 
   def on_connect(state) do
