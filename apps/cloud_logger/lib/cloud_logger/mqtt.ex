@@ -69,8 +69,10 @@ defmodule CloudLogger.MQTT do
   end
 
   def handle_request(%{"type" => "configure_touchstone"} = message, state) do
+    color = message["payload"]["color"] |> String.to_existing_atom()
+    interface_pid = message["payload"]["id"] |> String.to_existing_atom()
     1..3 |> Enum.each(fn _i ->
-      Cicada.DeviceManager.Device.IEQ.Sensor.set_mode(:"Sensor-IEQStation-#{message["payload"]["id"]}", :blue)
+      Cicada.DeviceManager.Device.IEQ.Sensor.set_mode(interface_pid, color)
       :timer.sleep(300)
     end)
     {%{result: :ok}, state}
