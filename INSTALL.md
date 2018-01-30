@@ -11,7 +11,7 @@ Once burned and installed on a Raspberry Pi, you can follow the [setup](/SETUP.m
 ## Installation
 * Install build-essential
 * Install libmnl-dev
-* Install Erlang v19.2
+* Install Erlang v20.1
   * Install erlang-esl
   * Install erlang-dev
   * Install erlang-xmerl
@@ -19,14 +19,14 @@ Once burned and installed on a Raspberry Pi, you can follow the [setup](/SETUP.m
   * Install erlang-src
   * Install erlang-eunit
   * Install erlang-parsetools
-* Install [Elixir v1.4](http://elixir-lang.org/install.html#unix-and-unix-like)
-* Install [Nerves](https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h)
+* Install [Elixir v1.5](http://elixir-lang.org/install.html#unix-and-unix-like)
+* Install [Nerves](http://nerves-project.org)
   * Install fwup
   * Install ssh-askpass
   * Install squashfs-tool
   * Install rebar and hex
-  * Install [bootstrap v0.2.1](https://github.com/nerves-project/archives/raw/master/nerves_bootstrap-0.2.1.ez)
-    * You will have to go into `~/.mix/archives/nerves_bootstrap-0.2.1/` and rename `nerves_bootstrap` to `nerves_bootstrap-0.2.1` there is a bug when you install bootstrap and it's not the latest build.
+  * Install [bootstrap v0.6](https://github.com/nerves-project/archives/raw/master/nerves_bootstrap-0.6.0.ez)
+    * You will have to go into `~/.mix/archives/nerves_bootstrap-0.6.6/` and rename `nerves_bootstrap` to `nerves_bootstrap-0.6.0` there is a bug when you install bootstrap and it's not the latest build.
 * Install Node >= 6.1
 * Install Elm 0.17.1
 
@@ -35,6 +35,8 @@ Once burned and installed on a Raspberry Pi, you can follow the [setup](/SETUP.m
 `cp default.env .env`
 
 change cipher keys to [random 10 digits](https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h) *remember to remove the spaces*
+
+Update MQTT Host
 
 `source .env`
 
