@@ -26,7 +26,7 @@ Once burned and installed on a Raspberry Pi, you can follow the [setup](/SETUP.m
   * Install squashfs-tool
   * Install rebar and hex
   * Install [bootstrap v0.6](https://github.com/nerves-project/archives/raw/master/nerves_bootstrap-0.6.0.ez)
-    * You will have to go into `~/.mix/archives/nerves_bootstrap-0.6.6/` and rename `nerves_bootstrap` to `nerves_bootstrap-0.6.0` there is a bug when you install bootstrap and it's not the latest build.
+    * You will have to go into `~/.mix/archives/nerves_bootstrap-0.6.0/` and rename `nerves_bootstrap` to `nerves_bootstrap-0.6.0` there is a bug when you install bootstrap and it's not the latest build.
 * Install Node >= 6.1
 * Install Elm 0.17.1
 
