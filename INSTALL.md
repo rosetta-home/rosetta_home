@@ -26,37 +26,38 @@ Once burned and installed on a Raspberry Pi, you can follow the [setup](/SETUP.m
   * Install squashfs-tool
   * Install rebar and hex
   * Install [bootstrap v0.6](https://github.com/nerves-project/archives/raw/master/nerves_bootstrap-0.6.0.ez)
+    * `$ mix archive.install https://github.com/nerves-project/archives/raw/master/nerves_bootstrap-0.6.0.ez`
     * You will have to go into `~/.mix/archives/nerves_bootstrap-0.6.0/` and rename `nerves_bootstrap` to `nerves_bootstrap-0.6.0` there is a bug when you install bootstrap and it's not the latest build.
 * Install Node >= 6.1
 * Install Elm 0.17.1
 
 
 ## Setup
-`cp default.env .env`
+`$ cp default.env .env`
 
 change cipher keys to [random 10 digits](https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h) *remember to remove the spaces*
 
 Update MQTT Host
 
-`source .env`
+`$ source .env`
 
 ## Build Web UI
-`cd apps/interface/priv`
+`$ cd apps/interface/priv`
 
-`elm-make src/Main.elm --output=app.js`
+`$ elm-make src/Main.elm --output=app.js`
 
 ## Running locally
-`MIX_ENV=dev mix do deps.get, deps.compile`
+`$ MIX_ENV=dev mix do deps.get, deps.compile`
 
-`MIX_ENV=dev mix compile`
+`$ MIX_ENV=dev mix compile`
 
-`MIX_ENV=dev iex -S mix`
+`$ MIX_ENV=dev iex -S mix`
 
 ## Build Firmware
-`cd apps/fw`
+`$ cd apps/fw`
 
-`MIX_ENV=prod mix do deps.get, deps.compile`
+`$ MIX_ENV=prod mix do deps.get, deps.compile`
 
-`MIX_ENV=prod mix firmware`
+`$ MIX_ENV=prod mix firmware`
 
-Insert microSD card and burn it with `MIX_ENV=prod mix firmware.burn`
+Insert microSD card and burn it with `$ MIX_ENV=prod mix firmware.burn`
