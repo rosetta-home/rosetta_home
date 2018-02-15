@@ -1,0 +1,42 @@
+{
+  "name": "rosetta_home",
+  "version": "1.0.0",
+  "description": "Websocket interface for hardware",
+  "scripts": {
+    "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
+    "build": "preact build --no-prerender --template template.html",
+    "serve": "preact build --no-prerender && preact serve",
+    "dev": "preact watch",
+    "lint": "eslint src"
+  },
+  "eslintConfig": {
+    "extends": "eslint-config-synacor"
+  },
+  "keywords": [
+    "preact",
+    "redux"
+  ],
+  "license": "MIT",
+  "author": "Christopher S Coté <chris@entropealabs.com>",
+  "devDependencies": {
+    "eslint": "^4.5.0",
+    "eslint-config-synacor": "^1.1.0",
+    "if-env": "^1.0.0",
+    "preact-cli": "^2.0.0"
+  },
+  "dependencies": {
+    "d3": "^4.12.0",
+    "d3-axis": "^1.0.8",
+    "d3-color": "^1.0.3",
+    "d3-interpolate": "^1.1.6",
+    "d3-scale": "^1.0.7",
+    "d3-scale-chromatic": "^1.1.1",
+    "d3-selection": "^1.2.0",
+    "d3-transition": "^1.1.1",
+    "preact": "^8.1.0",
+    "preact-material-components": "^1.2.4",
+    "preact-redux": "^1.2.0",
+    "reconnecting-websocket": "^3.2.2",
+    "redux": "^3.6.0"
+  }
+}

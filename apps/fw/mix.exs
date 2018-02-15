@@ -23,7 +23,7 @@ defmodule Fw.Mixfile do
   def application(target) do
     [
       mod: {Fw.Application, []},
-      extra_applications: [:logger] ++ applications(target),
+      extra_applications: [:logger], #all other applications are started with bootloader in config.exs
       env: [
         cipher: [
           keyphrase: System.get_env("CIPHER_KEYPHRASE"),
@@ -35,23 +35,12 @@ defmodule Fw.Mixfile do
    ]
   end
 
-  def applications(_target) do
-    [:cicada,
-     :interface,
-     :cloud_logger,
-     :rosetta_home_radio_thermostat,
-     :rosetta_home_ieq_sensor,
-     :rosetta_home_raven_smcd,
-     :rosetta_home_meteo_stick,
-     :rosetta_home_neurio
-   ]
-  end
-
   def deps do
     [{:nerves, "~> 0.7"},
      {:poison, "~> 3.0", override: true},
      {:cicada, github: "rosetta-home/cicada", override: true},
      {:interface, in_umbrella: true},
+     {:nerves_uart, "~> 1.0", override: true},
      {:cloud_logger, in_umbrella: true},
      {:rosetta_home_radio_thermostat, github: "rosetta-home/rosetta_home_radio_thermostat"},
      {:rosetta_home_chromecast, github: "rosetta-home/rosetta_home_chromecast"},
@@ -73,7 +62,7 @@ defmodule Fw.Mixfile do
   end
 
   def system("rosetta_rpi3"), do: {:"rosetta_rpi3", path: "/app/rosetta-home/rosetta_rpi3", runtime: false}
-  def system("rosetta_rpi0"), do: {:"rosetta_rpi0", path: "/app/rosetta-home/rosetta_rpi0", runtime: false}
+  def system("rosetta_rpi0"), do: {:rosetta_rpi0, "~> 0.17.2", runtime: false}
 
   def aliases("host"), do: []
   def aliases(_target) do
