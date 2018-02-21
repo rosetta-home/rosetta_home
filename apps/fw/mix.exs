@@ -49,7 +49,6 @@ defmodule Fw.Mixfile do
      {:rosetta_home_raven_smcd, github: "rosetta-home/rosetta_home_raven_smcd"},
      {:rosetta_home_meteo_stick, github: "rosetta-home/rosetta_home_meteo_stick"},
      {:rosetta_home_neurio, github: "rosetta-home/rosetta_home_neurio"},
-     {:nerves_uart, "~> 1.0", override: true}
     ] ++ deps(@target)
   end
 
@@ -61,12 +60,11 @@ defmodule Fw.Mixfile do
      {:bootloader, "~> 0.1"}]
   end
 
-  def system("rosetta_rpi3"), do: {:"rosetta_rpi3", path: "/app/rosetta-home/rosetta_rpi3", runtime: false}
+  def system("rosetta_rpi3"), do: {:rosetta_rpi3, "~> 0.20.1", runtime: false}
   def system("rosetta_rpi0"), do: {:rosetta_rpi0, "~> 0.17.2", runtime: false}
 
   def aliases("host"), do: []
   def aliases(_target) do
-    ["deps.precompile": ["nerves.precompile", "deps.precompile"],
-     "deps.loadpaths":  ["deps.loadpaths", "nerves.loadpaths"]]
+    [] |> Nerves.Bootstrap.add_aliases()
   end
 end
