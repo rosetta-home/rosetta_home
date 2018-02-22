@@ -26,7 +26,7 @@ defmodule CloudLogger.Worker do
     end)
     Logger.info "#{inspect devices}"
     devices |> CloudLogger.MQTT.send
-    Process.send_after(self(), :send_data, 59*1000)
+    Process.send_after(self(), :send_data, 55*1000)
     {:noreply, state}
   end
 

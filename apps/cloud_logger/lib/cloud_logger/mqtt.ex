@@ -14,13 +14,18 @@ defmodule CloudLogger.MQTT do
 
   @host System.get_env("MQTT_HOST")
   @port System.get_env("MQTT_PORT") |> String.to_integer
+  @target System.get_env("MIX_TARGET") || "host"
   Logger.info @host
 
   def start_link do
     client = Cicada.NetworkManager.BoardId.get
     Logger.info "MQTT Client #{client} Connecting: #{@host}:#{@port}"
-    priv_dir = :code.priv_dir(:cloud_logger)
-    transport = {:ssl, [{:certfile, "#{priv_dir}/ssl/cicada.crt"}, {:keyfile, "#{priv_dir}/ssl/cicada.key"}]}
+    ssl_path =
+      case @target do
+        "host" -> Path.join(:code.priv_dir(:cloud_logger), "ssl")
+        _other -> "/root"
+      end
+    transport = {:ssl, [{:certfile, "#{ssl_path}/cicada.crt"}, {:keyfile, "#{ssl_path}/cicada.key"}]}
     GenMQTT.start_link(__MODULE__, %State{client: client}, host: @host, port: @port, name: __MODULE__, client: client, transport: transport)
   end
 
