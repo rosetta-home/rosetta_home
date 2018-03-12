@@ -28,7 +28,7 @@ defmodule Interface.Mixfile do
   defp deps do
     [
       {:nerves, "~> 0.7", override: true},
-      {:cicada, github: "rosetta-home/cicada", override: true},
+      {:cicada, path: "/app/rosetta-home/cicada", override: true},#github: "rosetta-home/cicada", override: true},
       {:cowboy, "~> 1.0"},
       {:mdns, "~> 0.1.5"},
       {:poison, "~> 3.0", override: true},

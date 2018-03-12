@@ -20,7 +20,7 @@ defmodule Interface.Client do
     {:ok, %{started: false}}
   end
 
-  def handle_info(%NM{interface: %NMInterface{settings: %{ipv4_address: address}}, bound: true}, %{started: started} = state) do
+  def handle_info(%NM{current_address: address, bound: true}, %{started: started} = state) do
     Logger.info "mDNS IP Set: #{address}"
     {:ok, ip} = '#{address}' |> :inet.parse_address
     Mdns.Server.set_ip(ip)

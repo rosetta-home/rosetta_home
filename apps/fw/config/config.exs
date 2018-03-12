@@ -22,7 +22,7 @@ config :bootloader,
   ],
   app: :fw
 
-config :nerves_interim_wifi,
+config :nerves_network,
   regulatory_domain: "US"
 
 config :sasl, errlog_type: :error
