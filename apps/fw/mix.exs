@@ -23,7 +23,7 @@ defmodule Fw.Mixfile do
   def application(target) do
     [
       mod: {Fw.Application, []},
-      extra_applications: [:logger], #all other applications are started with bootloader in config.exs
+      extra_applications: [:logger, :runtime_tools], #all other applications are started with bootloader in config.exs
       env: [
         cipher: [
           keyphrase: System.get_env("CIPHER_KEYPHRASE"),
@@ -39,6 +39,7 @@ defmodule Fw.Mixfile do
     [{:nerves, "~> 0.7"},
      {:poison, "~> 3.0", override: true},
      {:cicada, github: "rosetta-home/cicada", override: true},
+     {:ring_logger, "~> 0.4"},
      {:interface, in_umbrella: true},
      {:nerves_uart, "~> 1.0", override: true},
      {:cloud_logger, in_umbrella: true},

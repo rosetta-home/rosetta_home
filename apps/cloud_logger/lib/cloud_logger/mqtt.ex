@@ -20,13 +20,21 @@ defmodule CloudLogger.MQTT do
   def start_link do
     client = Cicada.NetworkManager.BoardId.get
     Logger.info "MQTT Client #{client} Connecting: #{@host}:#{@port}"
-    ssl_path =
-      case @target do
-        "host" -> Path.join(:code.priv_dir(:cloud_logger), "ssl")
-        _other -> "/root"
-      end
+    ssl_path = get_ssl_path()
     transport = {:ssl, [{:certfile, "#{ssl_path}/cicada.crt"}, {:keyfile, "#{ssl_path}/cicada.key"}]}
     GenMQTT.start_link(__MODULE__, %State{client: client}, host: @host, port: @port, name: __MODULE__, client: client, transport: transport)
+  end
+
+  def get_ssl_path() do
+    old_path = Path.join(:code.priv_dir(:cloud_logger), "ssl")
+    case @target do
+      "host" -> old_path
+      _other ->
+        case File.exists?("/root/cicada.crt") do
+          false -> old_path
+          true -> "/root"
+        end
+    end
   end
 
   def init(state) do
