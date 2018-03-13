@@ -8,34 +8,22 @@
     <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css"></link>
     <link rel="stylesheet" href="/static/css/styles.css"></link>
     <script src="/static/js/jquery-3.1.1.min.js"></script>
-    <title>Rosetta Home 2.0</title>
+    <title>Rosetta Home SSID Credentials</title>
   </head>
-  <body onload="init();" class="container-fluid">
+  <body onload="" class="container-fluid">
     <div class="row">
       <div class="col-xs-12">
-        <h4>Select WiFi network to connect to and enter the network's password and hit 'Connect'.</h4>
+        <h4>Enter SSID and the network's password and hit 'Connect'.</h4>
         <h5>Networks</h5>
-        <div id="networks" class="list-group">
-          <%= for network <- networks do %>
-            <button type="button" class="list-group-item">
-              <p class="ssid"><%= network.ssid %></p>
-              <form class="psk" id="<%= network.ssid %>" method="POST" action="/connect_network">
-                <input name="ssid" type="hidden" value="<%= network.ssid %>" />
-                <input name="psk" type="password" placeholder="SSID Password" />
-                <input type="submit" value="Connect" />
-              </form>
-            </button>
-          <% end %>
-        </div>
+        <button type="button" class="list-group-item">
+          <p class="ssid">Network Credentials</p>
+          <form class="psk" id="network" method="POST" action="/connect_network">
+            <input name="ssid" type="text" value="" placeholder="SSID" />
+            <input name="psk" type="password" placeholder="SSID Password" />
+            <input type="submit" value="Connect" />
+          </form>
+        </button>
       </div>
     </div>
-    <script>
-      function init(){
-        $(".psk").hide();
-        $(".ssid").click(function(e){
-          $(this).parent().children(".psk").toggle();
-        });
-      }
-    </script>
   </body>
 </html>

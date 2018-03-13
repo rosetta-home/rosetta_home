@@ -16,7 +16,7 @@ defmodule Interface.UI.ConnectNetwork do
     Logger.info "Creds: #{inspect kv}"
     {_key, ssid} = List.keyfind(kv, "ssid", 0)
     {_key, psk} = List.keyfind(kv, "psk", 0)
-    :ok = NetworkManager.WiFi.write_creds(ssid, psk)
+    :ok = NetworkManager.Client.write_creds(ssid, psk)
     st = EEx.eval_file(Path.join(:code.priv_dir(:interface), "network_saved.html.eex"), [])
     headers = [
         {"cache-control", "no-cache"},
@@ -27,7 +27,7 @@ defmodule Interface.UI.ConnectNetwork do
         {"Access-Control-Allow-Origin", "*"},
     ]
     {:ok, req3} = :cowboy_req.reply(200, headers, st, req2)
-    Nerves.Firmware.reboot
+    Nerves.Runtime.reboot
     {:ok, req3, state}
   end
 
