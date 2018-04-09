@@ -39,6 +39,8 @@ defmodule Fw.Mixfile do
     [{:nerves, "~> 0.7"},
      {:poison, "~> 3.0", override: true},
      {:cicada, github: "rosetta-home/cicada", override: true},
+     {:ssdp, "~> 0.2.1", override: true},
+     {:httpoison, "~> 0.13", override: true},
      {:ring_logger, "~> 0.4"},
      {:interface, in_umbrella: true},
      {:nerves_uart, "~> 1.0", override: true},
